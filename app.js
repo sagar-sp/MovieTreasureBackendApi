@@ -7,7 +7,7 @@ const cors = require("cors");
 
 const port = 3005;
 mongoose
-  .connect("mongodb://localhost:27017/backendshop", {
+  .connect("mongodb://localhost:27017/myshop", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -21,16 +21,11 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
 
-const productRoutes = require("./routes/product");
-const categoryRoutes = require("./routes/category");
-const authRoutes = require("./routes/auth");
-const orderRoutes = require("./routes/order");
 
-app.use("/api", categoryRoutes);
+const authRoutes = require("./routes/auth");
+
 app.use("/api", authRoutes);
-app.use("/api", productRoutes);
-app.use("/api", orderRoutes);
-app.use("/uploads", express.static("uploads"));
+
 
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`)
